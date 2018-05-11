@@ -1,0 +1,385 @@
+
+<!-- <button (click)="showTest()">test</button> -->
+
+<!-- SHOW HIDE  (click)="showTest() 
+ *ngIf="test==true" -->
+
+<!-- NAVBAR -->
+<div style = 'overflow-x:hidden;'>
+  <nav class = "navbar navbar-expand-lg">  
+    <div class = "top">
+      <p class = "head">Trade Statistics</p>
+    </div>
+  </nav>
+<!-- -------------------------------------------- -->
+
+<div class="body">
+  <div class='row'>
+
+<!-- ==============================  LEFT PANE ==================================== -->
+    <div class='col-md-3 leftPane'>
+
+      <div class="navSelectTrade" >
+        <h4 class="selectTrade">Select Trade</h4>
+      </div>
+
+
+<!-- BUTTON GROUP -->
+<div class="btn-group btn-group-toggle" data-toggle="buttons">
+  <label class="btn btn-primary active  btn-sm">
+    <input type="radio" name="options" id="option1" autocomplete="off" checked> Export
+  </label>
+  <label class="btn btn-primary  btn-sm"  (click)="showImport()">
+    <input type="radio" name="options" id="option2" autocomplete="off"> Import
+  </label>
+  <label class="btn btn-primary  btn-sm">
+    <input type="radio" name="options" id="option3" autocomplete="off"> Total Trade
+  </label>
+</div>
+<!-- END BUTTON GROUP -->
+
+<div *ngIf="isHidden==false">
+  <app-test></app-test>
+</div>
+
+<!-- SELECT REPORT -->
+<div class="navSelectReport" *ngIf="isHidden==true">
+    <h4 class="selectReport">Select Report</h4>
+  </div>
+
+  <div class="btn-group dropdown " *ngIf="isHidden==true">
+    <button type="button" class="btn btn-body disabled btn-sm regionalBlocAndProductCode" style="width: 343px;">
+        Regional Bloc and Product Code
+    </button>
+    <button type="button" style="width: 40px;" class="btn btn-sm btnSplitReport dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class="sr-only">Toggle Dropdown</span>
+    </button>
+    <div class="dropdown-menu btn-sm dropdownRegionalBlocAndProductCode">
+        <a *ngFor="let selectReport of selectReports" class="dropdown-item" href="#">{{ selectReport.viewValue }}</a>
+      </div>
+  </div>
+<!-- END SELECT REPORT -->
+
+<!-- FILTERS -->
+<div class="navFilters" *ngIf="isHidden==true">
+    <h4 class="filters">Filters</h4>
+</div>
+<!-- END FILTERS -->
+<div class="date1">
+  <input class="inputDate1" [matDatepicker]="myDatepicker">
+    <mat-datepicker-toggle [for]="myDatepicker"></mat-datepicker-toggle>
+      <mat-datepicker #myDatepicker></mat-datepicker>
+
+  <input class="inputDate2" [matDatepicker]="myDatepicker2">
+    <mat-datepicker-toggle [for]="myDatepicker2"></mat-datepicker-toggle>
+      <mat-datepicker #myDatepicker2></mat-datepicker>
+</div>
+
+<!-- MONTH -->
+<div>
+  <kendo-combobox class="dropDownReport" [data]="reportItems">
+  </kendo-combobox>
+</div>
+
+<div class="navMonth" *ngIf="isHidden==true">
+    <h4 class="month">Month</h4>
+</div>
+<div class="btn-group dropdown" *ngIf="isHidden==true">
+    <button type="button" class="btn btn-body btn-sm btnmonth" style="width: 343px;">
+      Select Month/s
+    </button>
+    <button type="button" style="width: 40px;" class="btn btn-sm btnSplitMonth dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class="sr-only">Toggle Dropdown</span>
+    </button>
+    <div class="dropdown-menu btn-sm dropDownMonth">
+        <a *ngFor="let month of months" class="dropdown-item" href="#">{{ month.viewValue }}</a>
+      </div>
+</div>
+<!-- END MONTH -->
+
+<!-- QUARTER -->
+<div class="navQuarter" *ngIf="isHidden==true">
+    <h4 class="quarter">Quarter</h4>
+</div>
+<div class="btn-group dropdown" *ngIf="isHidden==true">
+    <button type="button" class="btn btn-body btn-sm btnquarter" style="width: 343px;">
+      Select Quarter/s
+    </button>
+    <button type="button" style="width: 40px;" class="btn btn-sm btnSplitQuarter dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class="sr-only">Toggle Dropdown</span>
+    </button>
+    <div class="dropdown-menu btn-sm dropDownQuarter" >
+        <a *ngFor="let quarter of quarters" class="dropdown-item" href="#">{{ quarter.viewValue }}</a>
+      </div>
+</div>
+<!-- END QUARTER -->
+
+<!-- SELECT REGIONAL BLOC -->
+<div class="navSelectRegionalBloc" *ngIf="isHidden==true">
+    <h4 class="selectregionalbloc">Select Regional Bloc</h4>
+</div>
+<div class="btn-group dropdown" *ngIf="isHidden==true">
+    <button type="button" class="btn btn-body btn-sm btnselectregionalbloc" style="width: 343px;">
+      Select Regional Bloc/s
+    </button>
+    <button type="button" style="width: 40px;" class="btn btn-sm btnSplitSelectRegionalBloc dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class="sr-only">Toggle Dropdown</span>
+    </button>
+    <div class="dropdown-menu btn-sm dropDownSelectRegionalBloc">
+        <a *ngFor="let regionalBloc of regionalBlocs" class="dropdown-item" href="#">{{ regionalBloc.viewValue }}</a>
+      </div>
+</div>
+<!-- END SELECT REGIONAL BLOC -->
+
+<!-- SELECT REGIONAL SUB -->
+<div class="navSelectRegionalSub" *ngIf="isHidden==true">
+    <h4 class="selectregionalsub">Select Regional Sub</h4>
+</div>
+<div class="btn-group dropdown" *ngIf="isHidden==true">
+    <button type="button" class="btn btn-body btn-sm btnselectregionalsub" style="width: 343px;">
+      Select Regional Sub/s
+    </button>
+    <button type="button" style="width: 40px;" class="btn btn-sm btnSplitSelectRegionalSub dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class="sr-only">Toggle Dropdown</span>
+    </button>
+    <div class="dropdown-menu btn-sm dropDownSelectRegionalSub">
+        <a *ngFor="let regionalSub of regionalSubs" class="dropdown-item" href="#">{{ regionalSub.viewValue }}</a>
+      </div>
+</div>
+<!-- END SELECT REGIONAL SUB -->
+
+<!-- SELECT PRODUCT CODE -->
+<div class="navSelectProductCode" *ngIf="isHidden==true">
+    <h4 class="selectproductcode">Select Product Code</h4>
+</div>
+<div class="btn-group dropdown" *ngIf="isHidden==true">
+    <button type="button" class="btn btn-sm btn-body btnselectproductcode" style="width: 343px;">
+      Select Product Code/s
+    </button>
+    <button type="button" style="width: 40px;" class="btn btn-sm btnSplitSelectProductCode dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class="sr-only">Toggle Dropdown</span>
+    </button>
+    <div class="dropdown-menu btn-sm dropDownSelectProductCode">
+        <a *ngFor="let productCode of productCodes" class="dropdown-item" href="#">{{ productCode.viewValue }}</a>
+      </div>
+</div>
+<!-- END SELECT PRODUCT CODE -->
+
+<!-- SELECT PRODUCT DESCRIPTION -->
+<div class="navSelectProductDesc" *ngIf="isHidden==true">
+    <h4 class="selectproductdesc">Select Product Desc ription</h4>
+</div>
+<div class="btn-group dropdown" *ngIf="isHidden==true">
+    <button type="button" class="btn btn-body btn-sm btnselectproductdesc" style="width: 343px;">
+      Select Product Desc/s
+    </button>
+    <button type="button" style="width: 40px;" class="btn btn-sm btnSplitSelectProductDesc dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class="sr-only">Toggle Dropdown</span>
+    </button>
+    <div class="dropdown-menu btn-sm dropDownSelectProductDesc">
+        <a *ngFor="let productDesc of productDescs" class="dropdown-item" href="#">{{ productDesc.viewValue }}</a>
+      </div>
+</div>
+<!-- END SELECT PRODUCT DESCRIPTION -->
+<div class="resetLink">
+<a class="reset" href="#" style="margin-right: 10px;">Reset</a>
+
+
+    <button type="button" class="btn btn-body applyFilter" style="margin-left: 20px;">Apply Filter</button>
+</div>
+
+<!-- RESET -->
+
+<!-- END RESET -->
+
+    </div>
+
+<!-- ------------------------------ END LEFT PANE ------------------------------- -->
+
+<!-- ============================== MIDDLE PANE ================================= -->
+    <div class='col-md-6 midPane'>
+
+        <div class="navregionalBlocandProductCode">
+            <h4 class="regionalBlocandProductCode">Regional Bloc and Product Group</h4>
+          </div>
+
+<!-- TAB -->
+<mat-tab-group>
+    
+  <mat-tab class="graph" label="Graph">
+    <div class="container">
+      <div class="midWhite">
+
+      <div class="btn-group dropdownChart">
+        <button type="button" class="btn btn-body btn-sm btnchart" style="width: 250px;">
+          Select Chart
+        </button>
+        <button type="button" style="width: 40px;" class="btn btn-sm btnChart dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <div class="dropdown-menu btn-sm dropChart">
+            <a *ngFor="let chart of charts" class="dropdown-item" href="#">{{ chart.viewValue }}</a>
+          </div>
+      </div>
+
+        <div>
+          <img class="dtiLogo" src="http://www.edc.net.ph/wp-content/uploads/2017/06/official-EMB-DTI-Logo-colored-1-300x175.png">
+          <span class="sideLogoText">Philippine Merchandise Export to the Worl in (is US$) Regional Bloc and Product Code</span>
+          <!-- <span class="sideLogoText2">Regional Bloc and Product Code</span> -->
+        </div>        
+
+      <!-- try -->
+
+      <div class="btn-group dropdown btn-sm">
+        <button type="button" class="btn btn-body" style="width: 350px;">
+           {{selectedDay}}
+        </button>
+        <button type="button" style="width: 50px;" class="btn btnSample dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="sr-only">Toggle Dropdown</span>
+          </button>
+          <button class="dropdown-menu" (change)="selectChangeHandler($event)">
+              <a *ngFor=" let selectReport of selectReports" class="dropdown-item">{{ selectReport.viewValue }}</a>
+          </button>
+
+
+
+        <!-- <select class="btn btn-sm btnSample" (change)="selectChangeHandler($event)" style="width: 50px;">
+            <option *ngFor=" let selectReport of selectReports">{{ selectReport.viewValue }}</option>
+        </select> -->
+<!-- 
+        <button type="button" style="width: 50px;"  (change)="selectChangeHandler($event)" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="sr-only">Toggle Dropdown</span>
+        </button>
+
+        <div class="dropdown-menu" (change)="selectChangeHandler($event)">
+            <a *ngFor=" let selectReport of selectReports" class="dropdown-item" >{{ selectReport.viewValue }}</a>
+        </div>         
+
+        <select class='form-control' (change)="selectChangeHandler($event)" style="width: 150px;">
+          <option>{{selectedDay}}</option>
+        </select> -->
+
+      </div>
+
+  <select class="btn btn-sm btnSplitReport dropdown-toggle  dropdown-toggle-split" data-toggle="dropdown"   (change)="selectChangeHandler($event)" style="width: 150px;">
+    <option *ngFor=" let selectReport of selectReports">{{ selectReport.viewValue }}</option>
+  </select>
+
+  <!-- <div class="btn-group" ng-class='{open: open}' id="buksanMo">
+    <button class="btn regionalBlocAndProductCode ">Action</button>
+    <button class="btn dropdown-toggle btnSplitReport" data-toggle="dropdown" ng-click='open=!open'><span class="caret"></span></button>
+    <ul class="dropdown-menu dropdownRegionalBlocAndProductCode">
+        <li><a *ngFor=" let selectReport of selectReports" class="dropdown-item" >{{ selectReport.viewValue }}</a></li>
+  
+    </ul>
+  </div> -->
+
+  <div>
+
+
+
+
+
+
+
+  <!-- <select class = 'form-control buttonSelectChart'>
+    <option value="">Select Month/s</option>
+    <option *ngFor="let countries of countries" [value]=countries.value>{{ countries.viewValue }}</option>
+  </select> -->
+  <!-- <span>test : {{countries.viewValue}}</span> -->
+  </div>
+
+      <div class="col-md-4"></div>
+
+    </div>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Table">
+      <div class="container">
+          <div class="midWhite">
+    <select class = 'form-control buttonSelectChart'>
+      <option value="">Select Month/s</option>
+        <option *ngFor="let countries of countries" [value]=countries.value>{{ countries.viewValue }}</option>
+      </select>
+
+    </div>
+  </div>
+    </mat-tab>
+</mat-tab-group>
+<!-- END TAB -->
+
+
+
+    </div>
+<!-- ------------------------------- END MIDDLE PANE ---------------------------- -->
+
+<!-- ============================== RIGHT PANE =================================== -->
+    <div class='col-md-3 rightPane'>
+
+        <div class="navQuickStats">
+            <h4 class="quickStats">Quick Stats</h4>
+        </div>
+
+        <div class="btn-group dropdown2">
+            <button type="button" class="btn btn-sm btn-body btnexport" style="width: 343px;">
+              Export
+            </button>
+            <button type="button" style="width: 40px;" class="btn btn-sm btnSplitExport dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <div class="dropdown-menu btn-sm dropDownExport">
+                <a *ngFor="let export of exports" class="dropdown-item" href="#">{{ export.viewValue }}</a>
+              </div>
+        </div>
+
+        <div class="box">
+          <div class="boxItem1">
+            <a href="#">Top 10 Export</a>
+          </div>
+          <div class="boxItem2">
+            <a href="#">Top 10 Countries</a>
+          </div>
+        </div>
+
+        <div class="btn-group dropdown2">
+            <button type="button" class="btn btn-sm btn-body btnimport" style="width: 343px;">
+              Import
+            </button>
+            <button type="button" style="width: 40px;" class="btn btn-sm btnSplitImport dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <div class="dropdown-menu btn-sm dropDownImport">
+                <a *ngFor="let import of imports" class="dropdown-item" href="#">{{ import.viewValue }}</a>
+              </div>
+        </div>
+
+        <div class="btn-group dropdown2">
+            <button type="button" class="btn btn-sm btn-body btntotaltrade" style="width: 343px;">
+              Total Trade
+            </button>
+            <button type="button" style="width: 40px;" class="btn btn-sm btnSplitTotalTrade dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <div class="dropdown-menu btn-sm dropDownTotalTrade">
+                <a *ngFor="let totalTrade of totalTrades" class="dropdown-item" href="#">{{ totalTrade.viewValue }}</a>
+              </div>
+        </div>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" id="toggleExport" class="btn btn-secondary">Export</button>
+            <button type="button" id="toggleImport" class="btn btn-secondary">Import</button>
+            <button type="button" id="toggleTotalTrade" class="btn btn-secondary">Total Trade</button>
+        </div>
+
+        <!-- <button type="button" [(ngModel)]="isHidden" id="toggleTotalTrade" class="btn btn-secondary">Test</button>
+
+        <div class="btn-group" ng-hide="isHidden" role="group" aria-label="Basic example">
+            <button type="button" id="toggleExport" class="btn btn-secondary">Export</button>
+            <button type="button" id="toggleImport" class="btn btn-secondary">Import</button>
+            <button type="button" id="toggleTotalTrade" class="btn btn-secondary">Total Trade</button>
+        </div> -->
+ 
+
+        <!-- ------------------------------- END RIGHT PANE ----------------------------- -->
+  </div>
+</div>

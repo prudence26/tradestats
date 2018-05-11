@@ -1,0 +1,10 @@
+https://material.angularjs.org/latest/demo/datepicker#basic-usage
+https://material.angular.io/components/datepicker/overview
+https://www.telerik.com/kendo-angular-ui/components/buttons/splitbutton/
+https://getbootstrap.com/docs/4.0/components/button-group/
+https://www.telerik.com/kendo-angular-ui/components/dropdowns/
+https://www.telerik.com/kendo-angular-ui/getting-started/#toc-adding-the-styles
+https://www.telerik.com/kendo-angular-ui/components/
+https://www.telerik.com/kendo-angular-ui/components/charts/chart/
+
+http://tradelinephilippines.dti.gov.ph/web/tradeline-portal/historical-trend
